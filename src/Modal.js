@@ -11,7 +11,7 @@ function ModalImage(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Show modal window</Button>}
+      trigger={<Button>Modal panel</Button>}
     >
       <Modal.Header>Title: {title}</Modal.Header>
       <Modal.Content image>

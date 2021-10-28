@@ -97,7 +97,7 @@ export default class App extends Component{
                                 description={photo} 
                                 />
                                 <button 
-                                className='btn m3' 
+                                className='btn' 
                                 onClick={() => this.deleteElem(photo.id)}
                                 >Delete Image</button>
                               </div>
