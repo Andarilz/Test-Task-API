@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Button, Image, Modal } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 function ModalImage(props) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const {title, image, description} = props
 
   return (

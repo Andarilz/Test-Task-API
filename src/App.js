@@ -6,15 +6,15 @@ import ModalImage from './Modal';
 export default class App extends Component{ 
 
   state = {
-    users: [],
-    usersForSave: [],
+    photos: [],
+    photosForSave: [],
     pageNum: 1,
     id: 0,
   }
 
   fetch = async () => {
-    let users = await axios.get(`https://jsonplaceholder.typicode.com/photos?_page=${this.state.pageNum}&_limit=12`)
-    this.setState({users: users.data, usersForSave: users.data})
+    let photos = await axios.get(`https://jsonplaceholder.typicode.com/photos?_page=${this.state.pageNum}&_limit=12`)
+    this.setState({photos: photos.data, photosForSave: photos.data})
   }
 
   async componentDidMount(){
@@ -27,13 +27,13 @@ export default class App extends Component{
 
   deleteElem = identificator => {
 
-    let users = this.state.users.filter(elem => elem.id !== identificator)
+    let photos = this.state.photos.filter(elem => elem.id !== identificator)
 
-    let usersForSave = this.state.usersForSave.filter(elem => elem.id !== identificator)
+    let photosForSave = this.state.photosForSave.filter(elem => elem.id !== identificator)
     
     this.setState({
-      users,
-      usersForSave
+      photos,
+      photosForSave
     })
   }
 
@@ -42,13 +42,13 @@ export default class App extends Component{
     setTimeout(() => {
             if(id){
               this.setState({
-                users: this.state.usersForSave
+                photos: this.state.photosForSave
               }, () => {
                 this.setState({id}, () => {
-                  let users = this.state.users.filter(card => Number(card.id) === Number(this.state.id))
-                  if(users){
+                  let photos = this.state.photos.filter(card => Number(card.id) === Number(this.state.id))
+                  if(photos){
                     this.setState({
-                      users,
+                      photos,
                       id: 0
                   })
                 }
@@ -57,7 +57,7 @@ export default class App extends Component{
         })
       } else {
         this.setState({
-          users: this.state.usersForSave
+          photos: this.state.photosForSave
         })
       }
     }, 100)
@@ -66,7 +66,7 @@ export default class App extends Component{
 
   render() {
     return (
-      <div className='contain'>
+      <div>
 
         <div className="row">
             <form className="col s12">
@@ -85,18 +85,27 @@ export default class App extends Component{
         <div className="row">
           
             {
-                this.state.users.map(user => (
+                this.state.photos.map(photo => (
                     <div className="col s12 m2">
-                        <div className="card small" key={user.id}>
+                        <div className="card small" key={photo.id}>
                           <div className="card-image">
-                            <img src={user.thumbnailUrl} alt={user.id} />
+                            <img src={photo.thumbnailUrl} alt={photo.id} />
                               <div className='card-action'>
-                                <ModalImage title={user.title} image={user.url} description={user} />
-                                <button className='btn m3' onClick={() => this.deleteElem(user.id)}>Delete Image</button>
+                                <ModalImage 
+                                title={photo.title} 
+                                image={photo.url} 
+                                description={photo} 
+                                />
+                                <button 
+                                className='btn m3' 
+                                onClick={() => this.deleteElem(photo.id)}
+                                >Delete Image</button>
                               </div>
                           </div>
                           <div className="card-content">
-                            <p className="card-title">Id number: {user.id}</p>
+                            <p className="card-title">
+                              Id number: {photo.id}
+                              </p>
                           </div>
                         </div>
                     </div>
@@ -106,16 +115,24 @@ export default class App extends Component{
 
         </div>
 
-        <div>
-            {this.state.users.length ? <h3 className='flex'>Page {this.state.pageNum}</h3> : <h2 className='flex'>Empty :((</h2>}
-              <button className="waves-effect waves-light btn-large m1" onClick={() => this.fetchData(1)}> Forward
-              </button>
-              {this.state.pageNum > 1 ? <button className="waves-effect waves-light btn-large m4" onClick={() => this.fetchData(-1)}> Back
-            </button> : null}
-        </div>
+
+          <div>
+              
+            {this.state.photos.length 
+            ? <h3 className='flex'>Page {this.state.pageNum}</h3> 
+            : <h2 className='flex'>Empty :((</h2>}
+
+              <button className="waves-effect waves-light btn-large m1" onClick={() => this.fetchData(1)}> Forward</button>
+
+              {this.state.pageNum > 1 
+              && <button className="waves-effect waves-light btn-large m4" onClick={() => this.fetchData(-1)}> Back</button>}
+              
+          </div>
 
       </div>
     );
+                  
   }
+
 }
 
