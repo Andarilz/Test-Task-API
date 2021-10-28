@@ -91,7 +91,7 @@ export default class App extends Component{
                           <div className="card-image">
                             <img src={user.thumbnailUrl} alt={user.id} />
                               <div className='card-action'>
-                                <ModalImage title={user.title} image={user.url} />
+                                <ModalImage title={user.title} image={user.url} description={user} />
                                 <button className='btn m3' onClick={() => this.deleteElem(user.id)}>Delete Image</button>
                               </div>
                           </div>

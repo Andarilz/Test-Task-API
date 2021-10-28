@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 function ModalImage(props) {
   const [open, setOpen] = React.useState(false)
+  const {title, image, description} = props
 
   return (
     <Modal
@@ -12,9 +13,14 @@ function ModalImage(props) {
       open={open}
       trigger={<Button>Show modal window</Button>}
     >
-      <Modal.Header>Title: {props.title}</Modal.Header>
+      <Modal.Header>Title: {title}</Modal.Header>
       <Modal.Content image>
-        <Image size='medium' src={props.image} wrapped />
+        <Image size='medium' src={image} wrapped />
+        <Modal.Description>
+          <p><strong>ID:</strong> {description.id}</p>
+          <p><strong>AlbumID:</strong> {description.albumId}</p>
+          <p><strong>IMG URL:</strong> {description.url}</p>
+        </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={() => setOpen(false)}>Close Modal</Button>
