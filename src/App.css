@@ -1,3 +1,7 @@
+.contain{
+  background-color: azure;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +40,22 @@
     transform: rotate(360deg);
   }
 }
+
+.m1{
+  margin-left: 0.8%;
+}
+
+.m3{
+  margin-left: 7%;
+}
+
+.m4{
+  margin-left: 83%;
+}
+
+.flex{
+  margin-left: 47%;
+  text-decoration: underline;
+}
+
+
